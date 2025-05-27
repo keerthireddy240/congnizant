@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>jQuery Event Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .event-card {
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      display: none; /* Initially hidden */
+    }
+
+    button {
+      padding: 10px 15px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Available Events</h2>
+  <button id="registerBtn">Toggle Event Cards</button>
+
+  <div class="event-card" id="event1">
+    <strong>Workshop: Web Development</strong>
+    <p>Learn modern HTML, CSS, and JavaScript.</p>
+  </div>
+
+  <div class="event-card" id="event2">
+    <strong>Webinar: JavaScript Basics</strong>
+    <p>Get started with variables, functions, and events.</p>
+  </div>
+
+  <div class="event-card" id="event3">
+    <strong>Conference: Future of Frontend</strong>
+    <p>Explore frameworks, tools, and trends for 2025.</p>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('#registerBtn').click(function () {
+        console.log('Register button clicked.');
+
+        $('.event-card').each(function () {
+          if ($(this).is(':visible')) {
+            $(this).fadeOut(500);
+          } else {
+            $(this).fadeIn(500);
+          }
+        });
+      });
+    });
+  </script>
+
+  <hr />
+  <p><strong>Why move to frameworks like React or Vue?</strong></p>
+  <p>They provide better **state management**, **component-based architecture**, and make building large-scale, interactive apps easier to manage and scale.</p>
+
+</body>
+</html>

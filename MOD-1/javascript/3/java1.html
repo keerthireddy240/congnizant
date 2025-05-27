@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Registration</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .event { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+
+  <h1>Available Events</h1>
+  <div id="eventContainer"></div>
+  <p id="errorMessage" class="error"></p>
+
+  <script>
+    // Sample event data
+    const events = [
+      { name: "Web Dev Bootcamp", date: "2025-06-10", seats: 5 },
+      { name: "AI Seminar", date: "2025-05-20", seats: 0 },
+      { name: "Startup Meetup", date: "2024-12-01", seats: 10 },
+      { name: "Design Workshop", date: "2025-07-01", seats: 3 }
+    ];
+
+    const eventContainer = document.getElementById("eventContainer");
+    const errorMessage = document.getElementById("errorMessage");
+    const today = new Date();
+
+    // Display only upcoming events with available seats
+    events.forEach(event => {
+      const eventDate = new Date(event.date);
+
+      // Condition to filter past or full events
+      if (eventDate > today && event.seats > 0) {
+        const eventDiv = document.createElement("div");
+        eventDiv.className = "event";
+
+        eventDiv.innerHTML = `
+          <strong>${event.name}</strong><br>
+          Date: ${event.date}<br>
+          Seats left: ${event.seats}<br>
+          <button onclick="register('${event.name}')">Register</button>
+        `;
+
+        eventContainer.appendChild(eventDiv);
+      } else {
+        // This else is just for clarity; we skip rendering invalid events
+      }
+    });
+
+    // Registration logic with error handling
+    function register(eventName) {
+      try {
+        if (!eventName || typeof eventName !== "string") {
+          throw new Error("Invalid event name provided.");
+        }
+
+        // Simulate registration success
+        alert(`You have successfully registered for: ${eventName}`);
+        errorMessage.textContent = ""; // Clear previous errors
+
+      } catch (error) {
+        errorMessage.textContent = "Registration failed: " + error.message;
+      }
+    }
+  </script>
+
+</body>
+</html>

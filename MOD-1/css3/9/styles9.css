@@ -1,0 +1,17 @@
+.news-article {
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    
+    column-count: 2;
+    column-gap: 30px;
+    column-rule: 1px solid gray;
+  }
+  
+  .news-article h1 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  

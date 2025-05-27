@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Events</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .event-card {
+      border: 1px solid #ccc;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Community Events</h1>
+
+  <button id="addEventBtn">Add New Event</button>
+
+  <h2>All Events</h2>
+  <div id="allEvents"></div>
+
+  <h2>Music Events</h2>
+  <div id="musicEvents"></div>
+
+  <script>
+    // Initial array of events
+    const communityEvents = [
+      { type: "Music", name: "Jazz Night" },
+      { type: "Workshop", name: "Baking Basics" },
+      { type: "Music", name: "Rock Concert" },
+      { type: "Seminar", name: "Digital Marketing" }
+    ];
+
+    // Function to render events inside a container
+    function renderEvents(events, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = ''; // clear existing content
+
+      // Use .map() to format display cards
+      const cards = events.map(event => {
+        return `<div class="event-card">${event.type} on ${event.name}</div>`;
+      });
+
+      container.innerHTML = cards.join('');
+    }
+
+    // Show all events initially
+    renderEvents(communityEvents, 'allEvents');
+
+    // Show only music events
+    function showMusicEvents() {
+      const musicEvents = communityEvents.filter(event => event.type === 'Music');
+      renderEvents(musicEvents, 'musicEvents');
+    }
+    showMusicEvents();
+
+    // Add new event on button click
+    document.getElementById('addEventBtn').addEventListener('click', () => {
+      // Add a new event using .push()
+      communityEvents.push({ type: "Music", name: "Classical Evening" });
+
+      // Re-render both sections
+      renderEvents(communityEvents, 'allEvents');
+      showMusicEvents();
+    });
+  </script>
+
+</body>
+</html>

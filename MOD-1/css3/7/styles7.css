@@ -1,0 +1,33 @@
+/* ================================
+   Table Styling
+   ================================ */
+
+   .event-table {
+    width: 80%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Headers */
+.event-table th {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+/* Table Data Cells */
+.event-table td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+/* Zebra Striping */
+.event-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

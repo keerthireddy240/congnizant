@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .event-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    .event-title {
+      font-size: 1.2em;
+      margin-bottom: 8px;
+    }
+    .event-desc {
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button.register {
+      background-color: #28a745;
+      color: white;
+    }
+    button.cancel {
+      background-color: #dc3545;
+      color: white;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Upcoming Events</h1>
+  <div id="events-container"></div>
+
+  <script>
+    // Sample events data
+    const events = [
+      { id: 1, title: "JavaScript Workshop", description: "Learn the basics of JS", registered: false },
+      { id: 2, title: "CSS Grid Tutorial", description: "Master layout with CSS Grid", registered: false },
+      { id: 3, title: "React Intro", description: "Getting started with React.js", registered: false }
+    ];
+
+    // Reference to container
+    const eventsContainer = document.querySelector('#events-container');
+
+    // Function to create and return an event card element
+    function createEventCard(event) {
+      const card = document.createElement('div');
+      card.className = 'event-card';
+      card.setAttribute('data-id', event.id);
+
+      const title = document.createElement('div');
+      title.className = 'event-title';
+      title.textContent = event.title;
+
+      const desc = document.createElement('div');
+      desc.className = 'event-desc';
+      desc.textContent = event.description;
+
+      const btnRegister = document.createElement('button');
+      btnRegister.className = 'register';
+      btnRegister.textContent = event.registered ? 'Registered' : 'Register';
+      btnRegister.disabled = event.registered;
+
+      const btnCancel = document.createElement('button');
+      btnCancel.className = 'cancel';
+      btnCancel.textContent = 'Cancel';
+      btnCancel.disabled = !event.registered;
+
+      // Register button click handler
+      btnRegister.addEventListener('click', () => {
+        event.registered = true;
+        updateEventCard(card, event);
+      });
+
+      // Cancel button click handler
+      btnCancel.addEventListener('click', () => {
+        event.registered = false;
+        updateEventCard(card, event);
+      });
+
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(btnRegister);
+      card.appendChild(btnCancel);
+
+      return card;
+    }
+
+    // Update the card UI based on registration status
+    function updateEventCard(card, event) {
+      const btnRegister = card.querySelector('button.register');
+      const btnCancel = card.querySelector('button.cancel');
+
+      btnRegister.textContent = event.registered ? 'Registered' : 'Register';
+      btnRegister.disabled = event.registered;
+
+      btnCancel.disabled = !event.registered;
+    }
+
+    // Render all events
+    function renderEvents() {
+      eventsContainer.innerHTML = ''; // Clear previous content
+      events.forEach(event => {
+        const card = createEventCard(event);
+        eventsContainer.appendChild(card);
+      });
+    }
+
+    // Initial render
+    renderEvents();
+  </script>
+
+</body>
+</html>

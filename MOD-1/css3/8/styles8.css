@@ -1,0 +1,50 @@
+/* ================================
+   Event Card Box Styling
+   ================================ */
+
+   .eventCard {
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #007BFF;
+    background-color: #f0f8ff;
+    width: 80%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   Form Styling with Outline
+   ================================ */
+
+.signup-form {
+    margin: 30px auto;
+    width: 80%;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Add outline on focus */
+.input-field:focus {
+    outline: 3px solid #007BFF;
+    border-color: #007BFF;
+}
+
+/* ================================
+   Visibility vs Display Comparison
+   ================================ */
+
+/* Element remains in layout, but invisible */
+.hidden-example {
+    visibility: hidden;
+}
+
+/* Element is removed from layout */
+.display-none-example {
+    display: none;
+}

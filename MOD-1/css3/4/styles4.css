@@ -1,0 +1,60 @@
+/* ================================
+   Body Styling with Background
+   ================================ */
+
+/* Apply a fallback background color and image */
+body {
+    background-color: #e0f7fa; /* HEX fallback */
+    background-image: url('https://via.placeholder.com/1600x900'); /* Replace with real city-themed image */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: rgba(0, 0, 0, 0.85); /* Dark text with transparency */
+    margin: 0;
+    padding: 0;
+}
+
+/* ================================
+   Content Container
+   ================================ */
+
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95); /* Light background with RGBA */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   Section Headers with Gradient
+   ================================ */
+
+.section-header {
+    background: linear-gradient(to right, #004d99, #3399ff); /* Blue gradient */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.section-subheader {
+    background: linear-gradient(to right, #00695c, #26a69a); /* Teal gradient */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* ================================
+   Paragraph Styling
+   ================================ */
+
+p {
+    font-size: 16px;
+    color: #333; /* HEX text color */
+    line-height: 1.6;
+}

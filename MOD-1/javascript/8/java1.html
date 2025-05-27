@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event List with Filters</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    input, select {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    .event-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+    }
+    .event-card h3 {
+      margin: 0 0 5px;
+    }
+    button {
+      padding: 6px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Event Explorer</h1>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by name..." />
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="workshop">Workshop</option>
+      <option value="seminar">Seminar</option>
+      <option value="tech">Tech</option>
+    </select>
+  </div>
+
+  <div id="events-container"></div>
+
+  <script>
+    const events = [
+      { id: 1, title: "JavaScript Basics", category: "workshop", registered: false },
+      { id: 2, title: "Advanced CSS", category: "seminar", registered: false },
+      { id: 3, title: "React & Redux", category: "tech", registered: false },
+      { id: 4, title: "UI/UX Design", category: "workshop", registered: false }
+    ];
+
+    const eventsContainer = document.querySelector('#events-container');
+    const searchInput = document.querySelector('#searchInput');
+    const categoryFilter = document.querySelector('#categoryFilter');
+
+    function createEventCard(event) {
+      const card = document.createElement('div');
+      card.className = 'event-card';
+      card.setAttribute('data-id', event.id);
+
+      const title = document.createElement('h3');
+      title.textContent = event.title;
+
+      const category = document.createElement('p');
+      category.textContent = `Category: ${event.category}`;
+
+      const button = document.createElement('button');
+      button.textContent = event.registered ? 'Registered' : 'Register';
+      button.disabled = event.registered;
+
+      button.onclick = () => {
+        event.registered = true;
+        button.textContent = 'Registered';
+        button.disabled = true;
+      };
+
+      card.appendChild(title);
+      card.appendChild(category);
+      card.appendChild(button);
+
+      return card;
+    }
+
+    function renderEvents(filteredEvents) {
+      eventsContainer.innerHTML = '';
+      filteredEvents.forEach(event => {
+        const card = createEventCard(event);
+        eventsContainer.appendChild(card);
+      });
+    }
+
+    function filterAndRender() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedCategory = categoryFilter.value;
+
+      const filtered = events.filter(event => {
+        const matchesCategory = selectedCategory === 'all' || event.category === selectedCategory;
+        const matchesSearch = event.title.toLowerCase().includes(searchTerm);
+        return matchesCategory && matchesSearch;
+      });
+
+      renderEvents(filtered);
+    }
+
+    // Event listeners
+    searchInput.addEventListener('keydown', filterAndRender);  // Filter on keydown
+    categoryFilter.addEventListener('change', filterAndRender); // Filter on dropdown change
+
+    // Initial render
+    renderEvents(events);
+  </script>
+
+</body>
+</html>

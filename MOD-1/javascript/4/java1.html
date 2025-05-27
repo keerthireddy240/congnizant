@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Manager</title>
+  <style>
+    .event { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+    .category { font-style: italic; color: gray; }
+  </style>
+</head>
+<body>
+
+  <h1>Event Manager</h1>
+  <div id="eventList"></div>
+
+  <h3>Filter by Category</h3>
+  <input type="text" id="categoryInput" placeholder="Enter category" />
+  <button onclick="searchCategory()">Search</button>
+
+  <p><strong>Registrations per Category:</strong></p>
+  <ul id="registrationStats"></ul>
+
+  <script>
+    // Events array
+    const events = [];
+
+    // Closure to track registrations by category
+    function categoryTracker() {
+      const counts = {};
+      return function(category) {
+        counts[category] = (counts[category] || 0) + 1;
+        return { ...counts }; // Return a copy
+      };
+    }
+
+    const trackCategoryRegistration = categoryTracker();
+
+    // Add an event
+    function addEvent(name, date, seats, category) {
+      events.push({ name, date, seats, category });
+    }
+
+    // Register user for event
+    function registerUser(eventIndex) {
+      const event = events[eventIndex];
+      if (!event) return alert("Invalid event.");
+      if (event.seats <= 0) return alert("No seats left!");
+
+      event.seats--;
+
+      const stats = trackCategoryRegistration(event.category);
+      renderStats(stats);
+      renderEvents(events); // re-render to show updated seats
+      alert(`Registered for ${event.name}`);
+    }
+
+    // Filter events by category using callback
+    function filterEventsByCategory(callback) {
+      return events.filter(callback);
+    }
+
+    // Search handler
+    function searchCategory() {
+      const categoryInput = document.getElementById("categoryInput").value.trim().toLowerCase();
+      const filtered = filterEventsByCategory(event => event.category.toLowerCase() === categoryInput);
+      renderEvents(filtered);
+    }
+
+    // Render stats
+    function renderStats(stats) {
+      const ul = document.getElementById("registrationStats");
+      ul.innerHTML = "";
+      for (let category in stats) {
+        const li = document.createElement("li");
+        li.textContent = `${category}: ${stats[category]} registration(s)`;
+        ul.appendChild(li);
+      }
+    }
+
+    // Render events to the DOM
+    function renderEvents(eventArray) {
+      const list = document.getElementById("eventList");
+      list.innerHTML = "";
+
+      eventArray.forEach((event, index) => {
+        const div = document.createElement("div");
+        div.className = "event";
+        div.innerHTML = `
+          <strong>${event.name}</strong> <span class="category">(${event.category})</span><br>
+          Date: ${event.date}<br>
+          Seats left: ${event.seats}<br>
+          <button onclick="registerUser(${index})">Register</button>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    // Initial events
+    addEvent("Tech Talk", "2025-06-20", 5, "Technology");
+    addEvent("Art Show", "2025-07-15", 3, "Art");
+    addEvent("Business Meetup", "2025-06-10", 4, "Business");
+    renderEvents(events);
+  </script>
+
+</body>
+</html>

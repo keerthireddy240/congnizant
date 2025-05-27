@@ -1,0 +1,67 @@
+/* ================================
+   Reset and Base Styles
+   ================================ */
+   body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* ================================
+   Link Styling
+   ================================ */
+
+/* Unvisited link */
+a:link {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+/* Visited link */
+a:visited {
+    color: #5a5a5a;
+}
+
+/* Hovered link */
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Active link (on click) */
+a:active {
+    color: #003d80;
+}
+
+/* ================================
+   Navigation Menu
+   ================================ */
+
+.nav-menu {
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    margin: 0 0 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu li {
+    padding: 10px 0;
+}
+
+/* ================================
+   Features List
+   ================================ */
+
+.features-list {
+    list-style-type: square;
+    list-style-position: inside;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.features-list li {
+    margin-bottom: 12px;
+    padding-left: 10px;
+}

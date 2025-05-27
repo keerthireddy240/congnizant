@@ -1,0 +1,22 @@
+/* Header styles */
+.main-heading {
+    color: navy;
+    font-size: 28px;
+    text-align: center;
+}
+
+/* Paragraph styles */
+.intro-text {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Utility styles (Reusable in future) */
+.text-center {
+    text-align: center;
+}
+
+.text-bold {
+    font-weight: bold;
+}

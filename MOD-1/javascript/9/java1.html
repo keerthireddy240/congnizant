@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Async Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin: 10px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #events {
+      margin-top: 20px;
+    }
+
+    .event {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Event List</h1>
+  <button onclick="loadEvents()">Load Events</button>
+  <div class="spinner" id="spinner"></div>
+  <div id="events"></div>
+
+  <script>
+    const API_URL = 'https://jsonplaceholder.typicode.com/posts'; // Mock endpoint
+
+    function showSpinner(show) {
+      document.getElementById('spinner').style.display = show ? 'block' : 'none';
+    }
+
+    function displayEvents(events) {
+      const container = document.getElementById('events');
+      container.innerHTML = '';
+      events.slice(0, 5).forEach(event => {
+        const div = document.createElement('div');
+        div.className = 'event';
+        div.innerHTML = `<strong>${event.title}</strong><p>${event.body}</p>`;
+        container.appendChild(div);
+      });
+    }
+
+    function loadEvents() {
+      showSpinner(true);
+
+      // --- Using .then() and .catch() ---
+      /*
+      fetch(API_URL)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          displayEvents(data);
+        })
+        .catch(error => {
+          alert('Failed to fetch events: ' + error.message);
+        })
+        .finally(() => {
+          showSpinner(false);
+        });
+      */
+
+      // --- Using async/await ---
+      (async () => {
+        try {
+          const response = await fetch(API_URL);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const data = await response.json();
+          displayEvents(data);
+        } catch (error) {
+          alert('Failed to fetch events: ' + error.message);
+        } finally {
+          showSpinner(false);
+        }
+      })();
+    }
+  </script>
+
+</body>
+</html>

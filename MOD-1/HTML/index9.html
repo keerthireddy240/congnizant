@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debugging Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #box {
+      width: 200px;
+      height: 100px;
+      background-color: lightblue;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Debugging Demo</h1>
+
+  <p>Click the button to toggle the box.</p>
+  <button onclick="toggleBox()">Toggle Box</button>
+
+  <div id="box"></div>
+
+  <script>
+    console.log("Script loaded.");
+
+    function toggleBox() {
+      console.log("Button clicked.");
+
+      const box = document.getElementById("box");
+
+      // Intentional bug: "togglClass" should be "toggle"
+      if (box.classList.contains("hidden")) {
+        console.log("Showing the box.");
+        box.classList.remove("hidden");
+      } else {
+        console.log("Hiding the box.");
+        box.classList.add("hidden");
+      }
+
+      // Add breakpoint here in DevTools to inspect value
+      let timestamp = new Date().toLocaleTimeString();
+      console.log("Toggled at:", timestamp);
+    }
+  </script>
+
+</body>
+</html>

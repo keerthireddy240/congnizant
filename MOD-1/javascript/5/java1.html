@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Object and Prototype Example</title>
+</head>
+<body>
+
+  <h2>Event System with Objects and Prototypes</h2>
+  <div id="output"></div>
+
+  <script>
+    // Define Event class
+    class Event {
+      constructor(id, name, category, totalSeats) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.totalSeats = totalSeats;
+        this.registered = 0;
+      }
+
+      // Register a user
+      registerUser() {
+        if (this.checkAvailability()) {
+          this.registered++;
+          return `User registered for ${this.name}.`;
+        } else {
+          return `No seats available for ${this.name}.`;
+        }
+      }
+    }
+
+    // Add checkAvailability method to prototype
+    Event.prototype.checkAvailability = function () {
+      return this.registered < this.totalSeats;
+    };
+
+    // Create an event instance
+    const event1 = new Event(101, "JavaScript Bootcamp", "Programming", 3);
+
+    // Register some users
+    console.log(event1.registerUser());
+    console.log(event1.registerUser());
+    console.log(event1.registerUser());
+    console.log(event1.registerUser()); // Should fail
+
+    // Display object keys and values using Object.entries
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = `<h3>Event Details (Using Object.entries)</h3><ul>`;
+
+    for (const [key, value] of Object.entries(event1)) {
+      outputDiv.innerHTML += `<li><strong>${key}</strong>: ${value}</li>`;
+    }
+    outputDiv.innerHTML += `</ul>`;
+  </script>
+
+</body>
+</html>

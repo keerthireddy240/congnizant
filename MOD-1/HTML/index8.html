@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Nearby Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Find Nearby Events</h1>
+  <button onclick="findLocation()">Find Nearby Events</button>
+
+  <div id="output"></div>
+
+  <script>
+    function findLocation() {
+      const output = document.getElementById("output");
+
+      // Check if geolocation is supported
+      if (!navigator.geolocation) {
+        output.innerHTML = "<span class='error'>Geolocation is not supported by your browser.</span>";
+        return;
+      }
+
+      // Success callback
+      function showPosition(position) {
+        const latitude = position.coords.latitude.toFixed(6);
+        const longitude = position.coords.longitude.toFixed(6);
+        output.innerHTML = `<span class='success'>Your location:<br>Latitude: ${latitude}<br>Longitude: ${longitude}</span>`;
+      }
+
+      // Error callback
+      function showError(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            output.innerHTML = "<span class='error'>Permission denied. Please allow location access.</span>";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            output.innerHTML = "<span class='error'>Location information is unavailable.</span>";
+            break;
+          case error.TIMEOUT:
+            output.innerHTML = "<span class='error'>The request to get your location timed out.</span>";
+            break;
+          default:
+            output.innerHTML = "<span class='error'>An unknown error occurred.</span>";
+        }
+      }
+
+      // Options for high accuracy
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,      // 10 seconds
+        maximumAge: 0        // Don't use cached position
+      };
+
+      // Request current position
+      navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+    }
+  </script>
+
+</body>
+</html>

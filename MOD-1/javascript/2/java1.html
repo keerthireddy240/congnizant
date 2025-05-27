@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Event Registration</h1>
+  <div id="eventDetails"></div>
+  <div id="seatCount" style="margin-top: 10px;"></div>
+
+  <button onclick="register()">Register</button>
+  <button onclick="cancelRegistration()">Cancel Registration</button>
+
+  <script>
+    // Use const for event name and date
+    const eventName = "Future Tech Expo";
+    const eventDate = "2025-09-20";
+
+    // Use let for available seats
+    let availableSeats = 100;
+
+    // Function to display event info
+    function displayEventInfo() {
+      document.getElementById("eventDetails").innerHTML = 
+        `📅 <strong>${eventName}</strong> is scheduled for <strong>${eventDate}</strong>`;
+      
+      document.getElementById("seatCount").innerHTML =
+        `🪑 Available Seats: <strong>${availableSeats}</strong>`;
+    }
+
+    // Function to register (decrease seat count)
+    function register() {
+      if (availableSeats > 0) {
+        availableSeats--; // Use of --
+        displayEventInfo();
+      } else {
+        alert("❌ No more seats available!");
+      }
+    }
+
+    // Function to cancel registration (increase seat count)
+    function cancelRegistration() {
+      availableSeats++; // Use of ++
+      displayEventInfo();
+    }
+
+    // Initial display
+    displayEventInfo();
+  </script>
+
+</body>
+</html>

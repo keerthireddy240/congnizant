@@ -1,0 +1,62 @@
+/* Base Styles */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0 15px;
+    background-color: #fafafa;
+    color: #222;
+  }
+  
+  .site-header {
+    background-color: #222;
+    color: white;
+    padding: 20px 15px;
+    text-align: center;
+  }
+  
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 10px 0 0;
+    gap: 30px;
+  }
+  
+  .nav-menu a {
+    color: #eee;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .nav-menu a:hover {
+    color: #66ccff;
+  }
+  
+  .content {
+    max-width: 800px;
+    margin: 30px auto;
+    text-align: center;
+  }
+  
+  .content h2 {
+    font-size: 2rem;
+  }
+  
+  .responsive-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Responsive tweaks */
+  
+  @media (max-width: 600px) {
+    .nav-menu {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  

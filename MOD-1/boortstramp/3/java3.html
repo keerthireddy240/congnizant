@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Grid Example</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    .box {
+      background-color: #0d6efd;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-4">
+    <div class="row">
+      <!-- col-12 (full width) on mobile, col-md-6 on tablets, col-lg-4 on desktop -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="box">Column 1</div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="box">Column 2</div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="box">Column 3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
